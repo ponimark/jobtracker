@@ -1,0 +1,20 @@
+{
+  "jobs": [
+    {
+      "id": 12345,
+      "title": "Senior Data Engineer",
+      "absolute_url": "https://boards.greenhouse.io/databricks/jobs/12345",
+      "location": {"name": "Remote, US"},
+      "content": "<p>We are looking for a <strong>Senior Data Engineer</strong> to join our data platform team.</p><p>Requirements: Python, Spark, dbt, SQL, Kafka. Salary: $150k-$200k.</p>",
+      "updated_at": "2026-04-14T10:00:00Z"
+    },
+    {
+      "id": 67890,
+      "title": "Staff Analytics Engineer",
+      "absolute_url": "https://boards.greenhouse.io/databricks/jobs/67890",
+      "location": {"name": "San Francisco, CA"},
+      "content": "<p>Join our analytics team. Must have dbt and SQL experience. $180k-$220k.</p>",
+      "updated_at": "2026-04-14T09:00:00Z"
+    }
+  ]
+}

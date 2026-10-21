@@ -1,0 +1,23 @@
+{
+  "name": "Acme",
+  "jobs": [
+    {
+      "shortcode": "WK-ABC123",
+      "title": "Senior Data Engineer",
+      "employment_type": "Full-time",
+      "description": "<p>Remote-friendly role building our modern data stack in Python and Spark.</p>",
+      "location": {
+        "location_str": "Remote, Europe"
+      }
+    },
+    {
+      "shortcode": "WK-DEF456",
+      "title": "Data Analyst",
+      "employment_type": "Full-time",
+      "description": "<p>SQL, Looker, stakeholder reporting.</p>",
+      "location": {
+        "location_str": "Berlin, Germany"
+      }
+    }
+  ]
+}

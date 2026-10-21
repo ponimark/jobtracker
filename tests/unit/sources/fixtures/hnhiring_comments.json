@@ -1,0 +1,27 @@
+{
+  "hits": [
+    {
+      "objectID": "99100001",
+      "comment_text": "Acme Corp | Data Engineer | Remote | Full-time | $140k-$180k<p>We are building the next generation data platform. Looking for a data engineer with Python and Spark experience.</p>",
+      "author": "acme_recruiter",
+      "created_at": "2026-04-01T14:00:00Z",
+      "story_id": 99000001
+    },
+    {
+      "objectID": "99100002",
+      "comment_text": "DataFlow Inc | Analytics Engineer | Seattle, WA or Remote | Full-time<p>Join our analytics engineering team. Experience with dbt and SQL required. Data pipeline work involved.</p>",
+      "author": "dataflow_hr",
+      "created_at": "2026-04-01T15:30:00Z",
+      "story_id": 99000001
+    },
+    {
+      "objectID": "99100003",
+      "comment_text": "FrontendCo | React Developer | Remote<p>Looking for a React developer with TypeScript experience. Strong UI skills required.</p>",
+      "author": "fe_recruiter",
+      "created_at": "2026-04-01T16:00:00Z",
+      "story_id": 99000001
+    }
+  ],
+  "nbHits": 3,
+  "page": 0
+}

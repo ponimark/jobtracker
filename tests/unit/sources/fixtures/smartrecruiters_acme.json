@@ -1,0 +1,27 @@
+{
+  "offset": 0,
+  "limit": 100,
+  "totalFound": 1,
+  "content": [
+    {
+      "id": "sr-42",
+      "name": "Senior Data Engineer",
+      "location": {
+        "city": "Amsterdam",
+        "region": "North Holland",
+        "country": "nl",
+        "remote": true
+      },
+      "typeOfEmployment": {
+        "label": "Permanent"
+      },
+      "jobAd": {
+        "sections": {
+          "jobDescription": {
+            "text": "<p>Build ETL pipelines in Python and dbt. Salary 80,000 - 110,000 EUR.</p>"
+          }
+        }
+      }
+    }
+  ]
+}

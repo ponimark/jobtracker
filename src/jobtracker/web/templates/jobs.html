@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Matches — {{ profile_name }}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f1117; color: #e2e8f0; min-height: 100vh; }
+
+    header { background: #1a1d27; border-bottom: 1px solid #2d3148; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+    header h1 { font-size: 20px; font-weight: 600; color: #fff; }
+    header .stats { font-size: 13px; color: #94a3b8; }
+
+    .filters { padding: 20px 32px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .filters input, .filters select { background: #1a1d27; border: 1px solid #2d3148; color: #e2e8f0; padding: 8px 14px; border-radius: 8px; font-size: 14px; outline: none; }
+    .filters input:focus, .filters select:focus { border-color: #6366f1; }
+    .filters input { width: 260px; }
+    .sort-group { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+    .filter-group { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+    .sort-wrap { display: flex; flex-direction: column; gap: 4px; }
+    .sort-wrap label { font-size: 12px; color: #94a3b8; }
+    .sort-wrap select { min-width: 170px; }
+    label.toggle { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #94a3b8; cursor: pointer; }
+    label.toggle input[type=checkbox] { width: 16px; height: 16px; accent-color: #6366f1; cursor: pointer; }
+
+    .grid { padding: 0 32px 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 16px; }
+
+    .card { background: #1a1d27; border: 1px solid #2d3148; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 12px; transition: border-color .15s; }
+    .card:hover { border-color: #6366f1; }
+
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .card-title { font-size: 15px; font-weight: 600; color: #fff; line-height: 1.4; }
+    .card-company { font-size: 13px; color: #94a3b8; margin-top: 3px; }
+
+    .score-badge { flex-shrink: 0; background: #6366f1; color: #fff; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+    .score-badge.high { background: #10b981; }
+    .score-badge.mid  { background: #f59e0b; }
+    .score-badge.low  { background: #64748b; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: #252a3d; color: #94a3b8; }
+    .tag.remote { background: #1e3a5f; color: #60a5fa; }
+    .tag.seniority { background: #2d1e5f; color: #a78bfa; }
+    .tag.cohort { background: #1e3a2f; color: #6ee7b7; }
+    .tag.merged { background: #2a1f12; color: #f59e0b; }
+    .tag.warning { background: #3a2a10; color: #fbbf24; }
+    .tag.applied { background: #16351f; color: #34d399; }
+
+    .apply-btn { margin-top: 4px; display: block; text-align: center; background: #6366f1; color: #fff; text-decoration: none; padding: 9px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; transition: background .15s; }
+    .apply-btn:hover { background: #4f46e5; }
+    .apply-btn.applied { background: #1f2937; color: #9ca3af; }
+
+    .apply-prompt {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      max-width: 420px;
+      background: #111827;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+      padding: 16px;
+      display: none;
+      z-index: 50;
+    }
+    .apply-prompt.show { display: block; }
+    .apply-prompt h3 { font-size: 14px; color: #fff; margin-bottom: 6px; }
+    .apply-prompt p { font-size: 13px; color: #94a3b8; line-height: 1.45; margin-bottom: 12px; }
+    .apply-prompt .actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .apply-prompt button {
+      border: 0;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .apply-prompt .yes { background: #10b981; color: #fff; }
+    .apply-prompt .no { background: #374151; color: #e5e7eb; }
+
+    .empty { grid-column: 1/-1; text-align: center; padding: 80px 0; color: #475569; font-size: 16px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Job Matches for {{ profile_name }}</h1>
+  <span class="stats">{{ total }} jobs · tracks {{ tracks | join(', ') }} · last updated {{ updated }}</span>
+</header>
+
+<div class="filters">
+  <input type="text" id="search" placeholder="Search title or company…" oninput="filter()">
+  <div class="filter-group">
+    <div class="sort-wrap">
+      <label for="trackFilter">Track</label>
+      <select id="trackFilter" onchange="filter()">
+        <option value="any" selected>Best of DE + AIML</option>
+        <option value="DE">DE best</option>
+        <option value="AIML">AIML best</option>
+      </select>
+    </div>
+    <div class="sort-wrap">
+      <label for="roleFilter">Role</label>
+      <select id="roleFilter" onchange="filter()">
+        <option value="data" selected>Data (DE / AIML / FDE)</option>
+        <option value="swe_ng">SWE new grad 2027</option>
+        <option value="any">All roles</option>
+      </select>
+    </div>
+    <div class="sort-wrap">
+      <label for="experienceFilter">Experience</label>
+      <select id="experienceFilter" onchange="filter()">
+        <option value="any" selected>Any experience</option>
+        <option value="intern">Intern</option>
+        <option value="new_grad">New grad / 2027</option>
+        <option value="0-2">0-2 years</option>
+        <option value="3-5">3-5 years</option>
+        <option value="6-8">6-8 years</option>
+        <option value="9+">9+ years</option>
+        <option value="unstated">Unstated</option>
+      </select>
+    </div>
+  </div>
+  <div class="sort-group">
+    <div class="sort-wrap">
+      <label for="sortPrimary">Primary sort</label>
+      <select id="sortPrimary" onchange="filter()">
+        <option value="recent" selected>Most Recent</option>
+        <option value="keyword">Keyword Match</option>
+        <option value="vector">Vector Match</option>
+      </select>
+    </div>
+    <div class="sort-wrap">
+      <label for="sortSecondary">Secondary sort</label>
+      <select id="sortSecondary" onchange="filter()">
+        <option value="keyword" selected>Keyword Match</option>
+        <option value="recent">Most Recent</option>
+        <option value="vector">Vector Match</option>
+        <option value="none">None</option>
+      </select>
+    </div>
+  </div>
+  <label class="toggle"><input type="checkbox" id="remoteOnly" onchange="filter()"> Remote only</label>
+</div>
+
+<div class="grid" id="grid">
+  {% for job in jobs %}
+  <div class="card"
+       data-job-id="{{ job.id }}"
+       data-title="{{ job.title | lower }}"
+      data-company="{{ job.company | lower }}"
+       data-remote="{{ 'true' if job.remote else 'false' }}"
+       data-keyword="{{ job.keyword_score }}"
+       data-vector="{{ job.vector_score }}"
+       data-rerank="{{ job.rerank_score if job.rerank_score is not none else '' }}"
+      data-best-track="{{ job.best_track }}"
+      data-sort-date="{{ job.date_sort or '' }}"
+      data-experience-bucket="{{ job.experience_bucket or 'unstated' }}"
+      data-is-intern="{{ 'true' if job.is_intern else 'false' }}"
+      data-is-new-grad="{{ 'true' if job.is_new_grad else 'false' }}"
+      data-role-lane="{{ job.role_lane or 'other' }}"
+      data-cohort="{{ job.cohort_timing or 'unknown' }}"
+      data-applied="{{ 'true' if job.applied_at else 'false' }}"
+      data-apply-url="{{ job.apply_url }}"
+      data-job-label="{{ job.title }} — {{ job.company }}">
+    <div class="card-top">
+      <div>
+        <div class="card-title">{{ job.title }}</div>
+        <div class="card-company">{{ job.company }}{% if job.location %} &nbsp;·&nbsp; {{ job.location }}{% endif %}</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:6px; align-items:flex-end;">
+        <span class="score-badge high">{{ job.best_track }}</span>
+        <span class="score-badge high">{{ "%.0f"|format(job.keyword_score * 100) }}% KW</span>
+        <span class="score-badge mid">{{ "%.0f"|format(job.vector_score * 100) }}% VE</span>
+        {% if job.rerank_score is not none %}<span class="score-badge low">{{ "%.0f"|format(job.rerank_score * 100) }}% RR</span>{% endif %}
+      </div>
+    </div>
+    <div class="tags">
+      {% if job.remote %}<span class="tag remote">Remote</span>{% endif %}
+      {% if job.role_lane == 'swe_ng' %}<span class="tag seniority">SWE NG</span>{% endif %}
+      {% if job.role_lane == 'data' %}<span class="tag cohort">Data</span>{% endif %}
+      {% if job.cohort_tag %}<span class="tag cohort">{{ job.cohort_tag }}</span>{% endif %}
+      {% if job.seniority %}<span class="tag seniority">{{ job.seniority }}</span>{% endif %}
+      {% if job.employment_type %}<span class="tag">{{ job.employment_type }}</span>{% endif %}
+      {% if job.merged_sources_label %}<span class="tag merged">{{ job.merged_sources_label }}</span>{% endif %}
+      {% if job.date_value %}<span class="tag">{{ job.date_label }}: {{ job.date_value }}</span>{% endif %}
+      {% if job.applied_at %}<span class="tag applied">Applied: {{ job.applied_at }}</span>{% endif %}
+      {% if job.experience %}<span class="tag">Experience: {{ job.experience }}</span>{% endif %}
+      {% if job.experience_warning %}<span class="tag warning">{{ job.experience_warning }}</span>{% endif %}
+      {% for ts in job.track_scores %}
+        <span class="tag {% if ts.track == job.best_track %}seniority{% endif %}">
+          {{ ts.track }} {{ "%.0f"|format(ts.keyword_score * 100) }}% KW / {{ "%.0f"|format(ts.vector_score * 100) }}% VE
+        </span>
+      {% endfor %}
+      {% if job.matched_skills %}<span class="tag">Matched ({{ job.best_track }}): {{ job.matched_skills | join(', ') }}</span>{% endif %}
+      {% if job.missing_skills %}<span class="tag warning">Missing ({{ job.best_track }}): {{ job.missing_skills | join(', ') }}</span>{% endif %}
+    </div>
+    <a class="apply-btn" href="{{ job.apply_url }}" target="_blank" rel="noopener">Apply →</a>
+  </div>
+  {% endfor %}
+  <div class="empty" id="empty" style="display:none">No jobs match your filters.</div>
+</div>
+
+<div class="apply-prompt" id="applyPrompt">
+  <h3>Did you apply?</h3>
+  <p id="applyPromptText"></p>
+  <div class="actions">
+    <button class="no" id="applyPromptNo" type="button">No</button>
+    <button class="yes" id="applyPromptYes" type="button">Yes</button>
+  </div>
+</div>
+
+<script>
+const PENDING_KEY = 'jobtracker.pending_apply';
+let promptJob = null;
+
+function filter() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const remoteOnly = document.getElementById('remoteOnly').checked;
+  const experienceFilter = document.getElementById('experienceFilter').value;
+  const trackFilter = document.getElementById('trackFilter').value;
+  const roleFilter = document.getElementById('roleFilter').value;
+  const keys = [
+    document.getElementById('sortPrimary').value,
+    document.getElementById('sortSecondary').value,
+  ].filter(key => key && key !== 'none');
+
+  const cards = [...document.querySelectorAll('.card')];
+  let visible = cards.filter(c => {
+    const matchText = c.dataset.title.includes(q) || c.dataset.company.includes(q);
+    const matchRemote = !remoteOnly || c.dataset.remote === 'true';
+    const matchExperience = experienceFilter === 'any'
+      || (experienceFilter === 'intern' && c.dataset.isIntern === 'true')
+      || (experienceFilter === 'new_grad' && c.dataset.isNewGrad === 'true')
+      || (!['intern', 'new_grad'].includes(experienceFilter)
+          && c.dataset.experienceBucket === experienceFilter);
+    const matchTrack = trackFilter === 'any' || c.dataset.bestTrack === trackFilter;
+    const matchRole = roleFilter === 'any' || c.dataset.roleLane === roleFilter;
+    return matchText && matchRemote && matchExperience && matchTrack && matchRole;
+  });
+
+  visible.sort((a, b) => compareCards(a, b, keys));
+
+  const grid = document.getElementById('grid');
+  cards.forEach(c => c.style.display = 'none');
+  visible.forEach(c => { c.style.display = 'flex'; grid.appendChild(c); });
+  document.getElementById('empty').style.display = visible.length ? 'none' : 'block';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  filter();
+});
+
+function compareCards(a, b, keys) {
+  for (const key of keys) {
+    let diff = 0;
+    if (key === 'recent') {
+      diff = (b.dataset.sortDate || '').localeCompare(a.dataset.sortDate || '');
+    } else if (key === 'keyword') {
+      diff = parseFloat(b.dataset.keyword) - parseFloat(a.dataset.keyword);
+    } else if (key === 'vector') {
+      diff = parseFloat(b.dataset.vector) - parseFloat(a.dataset.vector);
+    }
+    if (diff !== 0) return diff;
+  }
+  return 0;
+}
+
+function showApplyPrompt(job) {
+  promptJob = job;
+  document.getElementById('applyPromptText').textContent = `Mark ${job.label} as applied?`;
+  document.getElementById('applyPrompt').classList.add('show');
+}
+
+function hideApplyPrompt() {
+  promptJob = null;
+  document.getElementById('applyPrompt').classList.remove('show');
+}
+
+function clearPendingApply() {
+  localStorage.removeItem(PENDING_KEY);
+}
+
+function getPendingApply() {
+  try {
+    const raw = localStorage.getItem(PENDING_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function setPendingApply(job) {
+  localStorage.setItem(PENDING_KEY, JSON.stringify(job));
+}
+
+async function markApplied(jobId) {
+  const res = await fetch(`/jobs/${jobId}/applied`, { method: 'POST' });
+  if (!res.ok) {
+    throw new Error('Failed to mark applied');
+  }
+}
+
+document.querySelectorAll('.apply-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.card');
+    setPendingApply({
+      id: card.dataset.jobId,
+      label: card.dataset.jobLabel,
+      url: card.dataset.applyUrl,
+    });
+  });
+});
+
+document.querySelectorAll('.card').forEach(card => {
+  if (card.dataset.applied === 'true') {
+    const btn = card.querySelector('.apply-btn');
+    if (btn) {
+      btn.classList.add('applied');
+      btn.textContent = 'Applied ->';
+    }
+  }
+});
+
+document.getElementById('applyPromptYes').addEventListener('click', async () => {
+  if (!promptJob) return;
+  try {
+    await markApplied(promptJob.id);
+    clearPendingApply();
+    hideApplyPrompt();
+    location.reload();
+  } catch {
+    alert('Could not mark the job as applied.');
+  }
+});
+
+document.getElementById('applyPromptNo').addEventListener('click', () => {
+  clearPendingApply();
+  hideApplyPrompt();
+});
+
+function maybeShowPendingApply() {
+  const pending = getPendingApply();
+  if (!pending) return;
+  const card = document.querySelector(`.card[data-job-id="${pending.id}"]`);
+  if (card && card.dataset.applied === 'true') {
+    clearPendingApply();
+    return;
+  }
+  showApplyPrompt(pending);
+}
+
+window.addEventListener('pageshow', maybeShowPendingApply);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    maybeShowPendingApply();
+  }
+});
+window.addEventListener('focus', maybeShowPendingApply);
+window.addEventListener('load', () => {
+  setTimeout(maybeShowPendingApply, 300);
+});
+</script>
+</body>
+</html>

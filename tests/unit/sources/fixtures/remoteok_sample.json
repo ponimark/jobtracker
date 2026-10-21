@@ -1,0 +1,36 @@
+[
+  {"legal": "RemoteOK metadata block"},
+  {
+    "id": 999001,
+    "slug": "acme-senior-data-engineer",
+    "position": "Senior Data Engineer",
+    "company": "Acme",
+    "tags": ["python", "sql", "data", "aws"],
+    "description": "<p>Build our data pipelines end-to-end.</p>",
+    "url": "https://remoteok.com/l/acme-senior-data-engineer",
+    "salary_min": 150000,
+    "salary_max": 190000
+  },
+  {
+    "id": 999002,
+    "slug": "widgetco-frontend-dev",
+    "position": "Senior Frontend Developer",
+    "company": "WidgetCo",
+    "tags": ["react", "typescript"],
+    "description": "<p>Build the UI.</p>",
+    "url": "https://remoteok.com/l/widgetco-frontend-dev",
+    "salary_min": 130000,
+    "salary_max": 170000
+  },
+  {
+    "id": 999003,
+    "slug": "data-co-analytics-eng",
+    "position": "Analytics Engineer",
+    "company": "DataCo",
+    "tags": ["dbt", "sql", "analytics"],
+    "description": "<p>Own dbt models.</p>",
+    "url": "https://remoteok.com/l/data-co-analytics-eng",
+    "salary_min": 120000,
+    "salary_max": 160000
+  }
+]

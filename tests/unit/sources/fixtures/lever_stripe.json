@@ -1,0 +1,25 @@
+[
+  {
+    "id": "abc-123-def",
+    "text": "Senior Data Engineer",
+    "hostedUrl": "https://jobs.lever.co/stripe/abc-123-def",
+    "applyUrl": "https://jobs.lever.co/stripe/abc-123-def/apply",
+    "categories": {
+      "location": "Remote",
+      "commitment": "Full-time",
+      "team": "Data"
+    },
+    "lists": [
+      {
+        "text": "About the role",
+        "content": "<li>Build scalable data pipelines</li><li>Work with Python and Spark</li>"
+      },
+      {
+        "text": "Requirements",
+        "content": "<li>5+ years data engineering experience</li><li>Strong SQL skills</li>"
+      }
+    ],
+    "additionalPlain": "Salary range: $160k-$210k",
+    "createdAt": 1712000000000
+  }
+]

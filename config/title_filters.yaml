@@ -1,0 +1,130 @@
+# Hard title filters for ingest + web UI (DE / AI-ML / FDE + new-grad SWE).
+# Plain SWE still dropped unless title is new-grad/university/junior/intern
+# or the JD hits include keywords (jd_rescue).
+
+enabled: true
+
+# Companies to drop entirely (case-insensitive substring match on company name).
+exclude_companies: []   # e.g. ["somecompany"] to drop all jobs from a company
+
+include_title_keywords:
+  # DE / data
+  - "data engineer"
+  - "analytics engineer"
+  - "etl"
+  - "data platform"
+  - "data science"
+  - "data scientist"
+  - "data analyst"
+  - "data analytics"
+  - "data infrastructure"
+  - "data infra"
+  # AI / ML
+  - "machine learning"
+  - "ml engineer"
+  - "ml infra"
+  - "mlops"
+  - "ai engineer"
+  - "ai/ml"
+  - "artificial intelligence"
+  - "applied scientist"
+  - "applied ai"
+  - "llm"
+  - "nlp engineer"
+  # FDE
+  - "forward deployed"
+  - "fde"
+  - "forward-deployed"
+
+exclude_title_keywords:
+  - "senior"
+  - "sr."
+  - "sr "
+  - "staff"
+  - "principal"
+  - "lead"
+  - "manager"
+  - "director"
+  - "head of"
+  - "architect"
+  - "vp"
+  - "chief"
+  - "mid-level"
+  - "mid level"
+  - "iii"
+  - "iv"
+  - "ii"
+  # intern / internship / co-op are ALLOWED (early talent)
+  # Soft SWE family lives in soft_exclude_title_keywords (kept if include also hits)
+  - "frontend"
+  - "front-end"
+  - "front end"
+  - "full stack"
+  - "fullstack"
+  - "full-stack"
+  - "backend engineer"
+  - "back-end engineer"
+  - "back end engineer"
+  - "android"
+  - "ios"
+  - "mobile"
+  - "product manager"
+  - "program manager"
+  - "project manager"
+  - "apm"
+  - "associate product"
+  - "qa "
+  - "quality assurance"
+  - "test engineer"
+  - "security engineer"
+  - "hardware"
+  - "firmware"
+  - "embedded"
+  - "devops"
+  - "sre"
+  - "site reliability"
+  - "mechanical"
+  - "propulsion"
+  - "electrical design"
+  - "civil "
+  - "physical therapy"
+  - "phd graduate"
+  - "phd "
+  - "(phd"
+  - "ph.d"
+  - "c++"
+  - "quant trading"
+  - "high-frequency"
+  - "high frequency"
+
+# Soft-excluded SWE/SDE: dropped unless title hits include OR JD hits
+# jd_rescue_keywords / include_title_keywords (DE titles never scan JD).
+jd_rescue_enabled: true
+# Optional override; empty = reuse include_title_keywords on the description.
+jd_rescue_keywords: []
+
+# Drop these unless the title also hits include_title_keywords
+# (e.g. "Software Engineer, Data Platform" stays; plain "Software Engineer" goes).
+soft_exclude_title_keywords:
+  - "software engineer"
+  - "software engineering"
+  - "software developer"
+  - "software development engineer"
+  - " swe "
+  - "sde "
+  - "sde,"
+  - "sde)"
+  - "sde i"
+  - "sde ii"
+  - "sde iii"
+
+# Also drop these inferred seniority labels (from normalize.seniority)
+# Note: intern is allowed — early talent track
+exclude_seniority:
+  - senior
+  - staff
+  - principal
+  - lead
+  - manager
+  - director
+  - mid

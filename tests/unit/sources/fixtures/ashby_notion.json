@@ -1,0 +1,26 @@
+{
+  "apiVersion": "1",
+  "jobs": [
+    {
+      "id": "ashby-001",
+      "title": "Staff Data Engineer",
+      "location": "Remote - US",
+      "employmentType": "FullTime",
+      "descriptionHtml": "<p>Build the data platform at Notion.</p><p>Compensation: <strong>$170,000 - $220,000 USD</strong>. Work with Python, Airflow, Snowflake.</p>",
+      "jobUrl": "https://jobs.ashbyhq.com/notion/ashby-001",
+      "compensation": {
+        "minValue": 170000,
+        "maxValue": 220000,
+        "currency": "USD"
+      }
+    },
+    {
+      "id": "ashby-002",
+      "title": "Senior Software Engineer, Infrastructure",
+      "location": "San Francisco, CA",
+      "employmentType": "FullTime",
+      "descriptionHtml": "<p>Own the storage layer.</p>",
+      "jobUrl": "https://jobs.ashbyhq.com/notion/ashby-002"
+    }
+  ]
+}

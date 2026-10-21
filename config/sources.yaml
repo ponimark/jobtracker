@@ -1,0 +1,579 @@
+# Job source registry
+# Add company slugs for each ATS platform
+# poll_interval_s: override per company (optional, inherits from ats default)
+# priority: high = 30s polling, normal = 60s, low = 120s
+
+defaults:
+  greenhouse:
+    poll_interval_s: 60
+    priority: normal
+  lever:
+    poll_interval_s: 60
+    priority: normal
+  ashby:
+    poll_interval_s: 60
+    priority: normal
+  smartrecruiters:
+    poll_interval_s: 90
+    priority: normal
+  workable:
+    poll_interval_s: 90
+    priority: normal
+  jobspy:
+    poll_interval_s: 21600
+    priority: normal
+
+sources:
+  # ── Greenhouse ─────────────────────────────────────────────────────────────
+  - ats: greenhouse
+    slug: airbnb
+    name: Airbnb
+    priority: high
+
+  - ats: greenhouse
+    slug: doordashusa
+    name: DoorDash
+
+  - ats: greenhouse
+    slug: robinhood
+    name: Robinhood
+
+  - ats: greenhouse
+    slug: coinbase
+    name: Coinbase
+
+  - ats: greenhouse
+    slug: lyft
+    name: Lyft
+
+  - ats: greenhouse
+    slug: figma
+    name: Figma
+
+  - ats: greenhouse
+    slug: databricks
+    name: Databricks
+    priority: high
+
+  # dbt Labs Greenhouse board 404s (merged into Fivetran; covered by fivetran below).
+
+  - ats: greenhouse
+    slug: fivetran
+    name: Fivetran
+    priority: high
+
+  - ats: greenhouse
+    slug: starburst
+    name: Starburst
+
+  - ats: greenhouse
+    slug: hightouch
+    name: Hightouch
+
+  - ats: greenhouse
+    slug: hextechnologies
+    name: Hex
+
+  - ats: greenhouse
+    slug: stripe
+    name: Stripe
+    priority: high
+
+  - ats: greenhouse
+    slug: dropbox
+    name: Dropbox
+
+  - ats: greenhouse
+    slug: twilio
+    name: Twilio
+
+  - ats: greenhouse
+    slug: scaleai
+    name: Scale AI
+    priority: high
+
+  - ats: greenhouse
+    slug: brex
+    name: Brex
+
+  # Data platforms / lakehouse
+  - ats: ashby
+    slug: clickhouse
+    name: ClickHouse
+    priority: high
+
+  - ats: greenhouse
+    slug: sigmacomputing
+    name: Sigma Computing
+
+  - ats: greenhouse
+    slug: collibra
+    name: Collibra
+
+  - ats: greenhouse
+    slug: imply
+    name: Imply
+
+  - ats: ashby
+    slug: materialize
+    name: Materialize
+    priority: high
+
+  - ats: greenhouse
+    slug: dremio
+    name: Dremio
+    priority: high
+
+  - ats: greenhouse
+    slug: amplitude
+    name: Amplitude
+
+  - ats: greenhouse
+    slug: mixpanel
+    name: Mixpanel
+
+  # AI / ML infra
+  - ats: greenhouse
+    slug: anthropic
+    name: Anthropic
+    priority: high
+
+  - ats: greenhouse
+    slug: togetherai
+    name: Together AI
+
+  - ats: greenhouse
+    slug: datadog
+    name: Datadog
+    priority: high
+
+  - ats: greenhouse
+    slug: grafanalabs
+    name: Grafana Labs
+
+  # ── Lever ──────────────────────────────────────────────────────────────────
+  - ats: lever
+    slug: anyscale
+    name: Anyscale
+
+  - ats: lever
+    slug: palantir
+    name: Palantir
+    priority: high
+
+  - ats: lever
+    slug: metabase
+    name: Metabase
+
+  - ats: lever
+    slug: tinybird
+    name: Tinybird
+    priority: high
+
+  - ats: lever
+    slug: mistral
+    name: Mistral AI
+    priority: high
+
+  # ── Ashby ──────────────────────────────────────────────────────────────────
+  - ats: ashby
+    slug: ramp
+    name: Ramp
+    priority: high
+
+  - ats: ashby
+    slug: notion
+    name: Notion
+
+  - ats: ashby
+    slug: confluent
+    name: Confluent
+    priority: high
+
+  - ats: ashby
+    slug: modal
+    name: Modal
+
+  - ats: ashby
+    slug: motherduck
+    name: MotherDuck
+    priority: high
+
+  - ats: greenhouse
+    slug: reddit
+    name: Reddit
+
+  - ats: ashby
+    slug: linear
+    name: Linear
+
+  - ats: ashby
+    slug: dune
+    name: Dune Analytics
+    priority: high
+
+  - ats: ashby
+    slug: airbyte
+    name: Airbyte
+
+  - ats: ashby
+    slug: anomalo
+    name: Anomalo
+
+  # Data orchestration / observability
+  - ats: ashby
+    slug: prefect
+    name: Prefect
+    priority: high
+
+  - ats: ashby
+    slug: astronomer
+    name: Astronomer
+    priority: high
+
+  - ats: ashby
+    slug: montecarlodata
+    name: Monte Carlo
+    priority: high
+
+  - ats: ashby
+    slug: atlan
+    name: Atlan
+    priority: high
+
+  - ats: ashby
+    slug: lightdash
+    name: Lightdash
+
+  - ats: ashby
+    slug: coalesce
+    name: Coalesce
+    priority: high
+
+  # AI / vector DBs
+  - ats: ashby
+    slug: cohere
+    name: Cohere
+    priority: high
+
+  - ats: ashby
+    slug: perplexity
+    name: Perplexity
+
+  - ats: ashby
+    slug: replit
+    name: Replit
+
+  - ats: ashby
+    slug: openai
+    name: OpenAI
+    priority: high
+
+  - ats: ashby
+    slug: weaviate
+    name: Weaviate
+    priority: high
+
+  - ats: ashby
+    slug: pinecone
+    name: Pinecone
+    priority: high
+
+  - ats: ashby
+    slug: chalk
+    name: Chalk
+    priority: high
+
+  # Cloud databases
+  - ats: ashby
+    slug: snowflake
+    name: Snowflake
+    priority: high
+
+  - ats: ashby
+    slug: supabase
+    name: Supabase
+
+  - ats: ashby
+    slug: neon
+    name: Neon
+
+  - ats: ashby
+    slug: plaid
+    name: Plaid
+
+  # ── SmartRecruiters ────────────────────────────────────────────────────────
+  - ats: smartrecruiters
+    slug: transferwise
+    name: Wise
+
+  - ats: smartrecruiters
+    slug: KAYAK
+    name: KAYAK
+
+  # ── RSS / JSON feeds ───────────────────────────────────────────────────────
+  - ats: remoteok
+    slug: remoteok
+    name: RemoteOK
+    poll_interval_s: 120
+
+  # WeWorkRemotely RSS is 403 from this host; skip until they unblock.
+
+
+  # ── HN Who is Hiring ───────────────────────────────────────────────────────
+  - ats: hnhiring
+    slug: whoishiring
+    name: HN Who is Hiring
+    poll_interval_s: 3600
+
+  # ── Workday ────────────────────────────────────────────────────────────────
+  - ats: workday
+    slug: netflix
+    name: Netflix
+    priority: high
+    workday_host: netflix.wd108.myworkdayjobs.com
+    workday_path: Netflix
+    poll_interval_s: 3600
+
+  - ats: workday
+    slug: adobe
+    name: Adobe
+    workday_host: adobe.wd5.myworkdayjobs.com
+    workday_path: external_experienced
+    poll_interval_s: 3600
+
+  - ats: workday
+    slug: cisco
+    name: Cisco
+    workday_host: cisco.wd5.myworkdayjobs.com
+    workday_path: Cisco_Careers
+    poll_interval_s: 3600
+
+  - ats: workday
+    slug: salesforce
+    name: Salesforce
+    workday_host: salesforce.wd12.myworkdayjobs.com
+    workday_path: External_Career_Site
+    poll_interval_s: 3600
+
+  # ── Direct careers-site APIs (big tech / finance) ──────────────────────────
+  - ats: careers
+    slug: amazon
+    name: Amazon
+    site: amazon
+    queries: ["data engineer", "business intelligence engineer", "analytics engineer", "university graduate data"]
+    priority: high
+    poll_interval_s: 1800
+
+  - ats: careers
+    slug: microsoft
+    name: Microsoft
+    site: microsoft
+    queries: ["data engineer", "analytics engineer", "university data", "new grad software engineer data"]
+    priority: high
+    poll_interval_s: 1800
+
+  - ats: careers
+    slug: jpmorgan
+    name: JPMorgan Chase
+    site: jpmorgan
+    queries: ["data engineer", "analytics engineer", "software engineer program", "data analytics associate"]
+    poll_interval_s: 3600
+
+  # ── Community GitHub new-grad lists (README tables) ────────────────────────
+  - ats: github_list
+    slug: simplify-new-grad
+    name: GitHub - SimplifyJobs New-Grad-Positions
+    repo: SimplifyJobs/New-Grad-Positions
+    branch: dev
+    poll_interval_s: 600
+
+  - ats: github_list
+    slug: vansh-new-grad-2027
+    name: GitHub - vanshb03 New-Grad-2027
+    repo: vanshb03/New-Grad-2027
+    branch: dev
+    poll_interval_s: 600
+
+  - ats: github_list
+    slug: zapply-ds-new-grad-2027
+    name: GitHub - zapplyjobs Data Science New-Grad 2027
+    repo: zapplyjobs/New-Grad-Data-Science-Jobs-2027
+    branch: main
+    poll_interval_s: 600
+
+  # ── Adzuna (aggregator: Indeed + CareerBuilder + Reed + others) ────────────
+  # Focus: in-person data-engineer roles in the US. Future expansion planned
+  # for SWE / DE / DS / AI / ML — add new entries alongside these.
+  # Free tier: ~250 req/day, 50 jobs/req. Currency auto-mapped from country.
+
+  # Seattle (primary — user moving there for UW Sept 2025)
+  - ats: adzuna
+    slug: adzuna-data-engineer-seattle
+    name: Adzuna — data engineer (Seattle)
+    priority: high
+    query: data engineer
+    location: Seattle
+    country: us
+    max_days_old: 7
+    poll_interval_s: 14400
+
+  # Major US metros (in-person)
+  - ats: adzuna
+    slug: adzuna-data-engineer-san-francisco
+    name: Adzuna — data engineer (San Francisco)
+    query: data engineer
+    location: San Francisco
+    country: us
+    max_days_old: 7
+    poll_interval_s: 14400
+
+  - ats: adzuna
+    slug: adzuna-data-engineer-new-york
+    name: Adzuna — data engineer (New York)
+    query: data engineer
+    location: New York
+    country: us
+    max_days_old: 7
+    poll_interval_s: 14400
+
+  - ats: adzuna
+    slug: adzuna-data-engineer-austin
+    name: Adzuna — data engineer (Austin)
+    query: data engineer
+    location: Austin
+    country: us
+    max_days_old: 7
+    poll_interval_s: 14400
+
+  - ats: adzuna
+    slug: adzuna-data-engineer-boston
+    name: Adzuna — data engineer (Boston)
+    query: data engineer
+    location: Boston
+    country: us
+    max_days_old: 7
+    poll_interval_s: 14400
+
+  # Entry-level feeds (user is early-career)
+  - ats: adzuna
+    slug: adzuna-junior-data-engineer-us
+    name: Adzuna — junior data engineer (US)
+    query: junior data engineer
+    country: us
+    max_days_old: 14
+    poll_interval_s: 21600
+
+  - ats: adzuna
+    slug: adzuna-entry-level-data-engineer-us
+    name: Adzuna — entry level data engineer (US)
+    query: entry level data engineer
+    country: us
+    max_days_old: 14
+    poll_interval_s: 21600
+
+  # Adjacent roles (analytics eng — big entry-level bucket w/ dbt/Snowflake)
+  - ats: adzuna
+    slug: adzuna-analytics-engineer-us
+    name: Adzuna — analytics engineer (US)
+    query: analytics engineer
+    country: us
+    max_days_old: 7
+    poll_interval_s: 14400
+
+  # Remote fallback (single entry — primary focus is in-person)
+  - ats: adzuna
+    slug: adzuna-data-engineer-remote-us
+    name: Adzuna — data engineer (remote, US)
+    query: data engineer remote
+    country: us
+    max_days_old: 7
+    poll_interval_s: 21600
+
+  # ── JobSpy (Indeed + Google) ─────
+  # Default sites are indeed+google (Tesla internships came from Indeed in JobSpy scrapes).
+  - ats: jobspy
+    slug: jobspy-new-grad-data-engineer
+    name: JobSpy — new grad data engineer
+    priority: high
+    search_term: new grad data engineer OR university graduate data engineer OR junior data engineer
+    location: United States
+    sites: [indeed, google]
+    results_wanted: 30
+    hours_old: 168
+    poll_interval_s: 14400
+
+  - ats: jobspy
+    slug: jobspy-new-grad-ml
+    name: JobSpy — new grad ML / AI
+    priority: high
+    search_term: new grad machine learning engineer OR junior machine learning engineer OR AI engineer
+    location: United States
+    sites: [indeed, google]
+    results_wanted: 30
+    hours_old: 168
+    poll_interval_s: 14400
+
+  - ats: jobspy
+    slug: jobspy-new-grad-swe
+    name: JobSpy — new grad software engineer
+    priority: high
+    search_term: new grad software engineer OR university graduate software engineer OR software engineer new grad 2027
+    location: United States
+    sites: [indeed, google]
+    results_wanted: 30
+    hours_old: 168
+    poll_interval_s: 14400
+
+  - ats: jobspy
+    slug: jobspy-data-engineer-intern
+    name: JobSpy — data engineer intern
+    priority: high
+    search_term: data engineer intern OR data engineering internship
+    location: United States
+    sites: [indeed, google]
+    results_wanted: 30
+    hours_old: 168
+    poll_interval_s: 14400
+
+  - ats: jobspy
+    slug: jobspy-tesla-data-engineer-intern
+    name: JobSpy — Tesla data engineer intern
+    priority: high
+    search_term: Tesla Data Engineer Intern
+    location: United States
+    sites: [indeed, google]
+    results_wanted: 25
+    hours_old: 336
+    poll_interval_s: 14400
+
+  - ats: jobspy
+    slug: jobspy-tesla-internship-data
+    name: JobSpy — Tesla internship data
+    priority: high
+    search_term: Tesla Internship Data Engineer
+    location: United States
+    sites: [indeed, google]
+    results_wanted: 25
+    hours_old: 336
+    poll_interval_s: 14400
+
+  - ats: jobspy
+    slug: jobspy-meta-university-grad-de
+    name: JobSpy — Meta university grad DE
+    search_term: Meta Data Engineer University Grad
+    location: United States
+    sites: [indeed, google]
+    results_wanted: 20
+    hours_old: 168
+    poll_interval_s: 21600
+
+  - ats: jobspy
+    slug: jobspy-forward-deployed
+    name: JobSpy — forward deployed engineer
+    search_term: forward deployed engineer
+    location: United States
+    sites: [indeed, google]
+    results_wanted: 20
+    hours_old: 168
+    poll_interval_s: 21600

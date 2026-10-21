@@ -1,0 +1,108 @@
+# User profile for semantic job matching
+# Copy this file to config/profile.yaml and edit it for yourself.
+
+name: "Your Name"
+
+# Job titles you're targeting
+title_preferences:
+  - "Data Engineer"
+  - "Junior Data Engineer"
+  - "Data Engineer Intern"
+  - "Data Engineering Intern"
+  - "Analytics Engineer"
+  - "Data Analyst"
+  - "Data Platform Engineer"
+  - "ETL Engineer"
+
+# Technical skills (used for skill-overlap scoring)
+skills:
+  - Python
+  - SQL
+  - dbt
+  - DBT
+  - Airflow
+  - Spark
+  - PySpark
+  - Kafka
+  - Flink
+  - Snowflake
+  - BigQuery
+  - Databricks
+  - Redshift
+  - AWS
+  - S3
+  - Azure
+  - GCP
+  - Docker
+  - PostgreSQL
+  - Redis
+  - Hadoop
+  - Hive
+  - Cassandra
+  - NoSQL
+  - ETL
+  - ELT
+  - Data Modeling
+  - Data Warehouse
+  - Data Lake
+  - OLAP
+  - OLTP
+  - SCD Type 2
+  - Parquet
+  - CI/CD
+  - Scala
+  - Java
+  - Linux
+  - Power BI
+  - Tableau
+  - Excel
+  - Data Visualization
+  - Pandas
+  - Matplotlib
+  - Plotly
+  - Seaborn
+  - Git
+  - Data Quality
+  - Data Mining
+  - Data Pipeline
+  - FastAPI
+
+# Years of experience
+experience_years: 2
+
+# Seniority levels to match
+# Early-career / intern level: targeting entry and junior roles
+seniority:
+  - intern
+  - junior
+  - entry
+  - associate
+
+# Location preferences
+# Preferred locations
+locations:
+  - Remote
+  - Remote-US
+  - New York
+  - San Francisco, CA
+  - Remote
+
+# Salary preferences (USD annual, 0 = no filter)
+# Entry-level / internship range
+salary_min_usd: 0
+salary_max_usd: 0
+
+# Keywords that disqualify a job
+exclude_keywords:
+  - "security clearance"
+  - "clearance required"
+  - "10+ years"
+  - "8+ years"
+  - "7+ years"
+
+# Bio used for embedding — this drives all match scores
+bio: >
+  Early-career data engineer with internship experience building ETL/ELT pipelines
+  and data platforms. Hands-on with Python, SQL, dbt, Airflow, Spark, and Kafka,
+  and cloud data warehouses such as Snowflake, BigQuery, and Redshift. Seeking
+  data engineering internships or entry-level roles, open to remote positions.

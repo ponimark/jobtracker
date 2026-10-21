@@ -1,0 +1,36 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Secrets
+.env
+
+# Logs
+*.log
+*.err
+
+# Claude internal
+.claude/
+
+# Coverage artifacts
+.coverage*
+
+# Personal files
+*.pdf
+
+# One-off scripts
+discover_sources.py
+recompute.*
+
+# Personal data (keep local)
+config/profile.yaml
+resumes/*
+!resumes/example.md
+.env

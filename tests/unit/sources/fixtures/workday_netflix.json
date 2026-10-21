@@ -1,0 +1,21 @@
+{
+  "total": 2,
+  "jobPostings": [
+    {
+      "title": "Data Engineer",
+      "externalPath": "/job/Data-Engineering/Data-Engineer_JR-0000001",
+      "postedOn": "Posted 3 Days Ago",
+      "locationsText": "Remote, United States",
+      "jobReqId": "JR-0000001",
+      "description": ""
+    },
+    {
+      "title": "Senior Data Engineer",
+      "externalPath": "/job/Data-Engineering/Senior-Data-Engineer_JR-0000002",
+      "postedOn": "Posted Today",
+      "locationsText": "Los Gatos, CA or Remote",
+      "jobReqId": "JR-0000002",
+      "description": "$180,000 - $220,000 per year"
+    }
+  ]
+}
